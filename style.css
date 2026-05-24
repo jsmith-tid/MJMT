@@ -1092,7 +1092,7 @@ body {
     }
 
     .nav-menu.active {
-        max-height: 500px;
+        max-height: 800px;
     }
 
     .nav-menu li {
@@ -1138,11 +1138,6 @@ body {
 
     .coaches-header .btn {
         align-self: flex-start;
-    }
-
-    .nav-menu {
-        gap: 15px;
-        font-size: 14px;
     }
 
     .logo {
