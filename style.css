@@ -60,6 +60,13 @@ body {
     color: var(--accent-gold);
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--accent-red);
 }
 
 .nav-menu {
@@ -447,8 +454,14 @@ body {
 
 .coaches-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
     gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .coaches-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .coach-card {
@@ -499,6 +512,54 @@ body {
 .coach-card p:first-of-type {
     color: var(--accent-gold);
     font-weight: bold;
+}
+
+.coach-card .title {
+    color: var(--accent-gold);
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 0 20px;
+    margin: 5px 0;
+}
+
+.coach-link {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 15px 20px 20px;
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid var(--accent-gold);
+}
+
+.coach-link:hover {
+    color: var(--accent-red);
+    border-bottom-color: var(--accent-red);
+}
+
+.coaches-cta {
+    text-align: center;
+    margin-top: 80px;
+    padding: 60px 40px;
+    background-color: var(--primary-light);
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.coaches-cta h3 {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.coaches-cta p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
 }
 
 .bio {
@@ -841,6 +902,10 @@ body {
     margin-bottom: 30px;
 }
 
+.profile-info h3 {
+    padding-bottom: 20px;
+}
+
 .profile-section {
     margin-bottom: 40px;
 }
@@ -859,6 +924,7 @@ body {
     color: var(--text-gray);
     line-height: 1.8;
     font-size: 15px;
+    padding-bottom: 15px;
 }
 
 .specialties-list {
