@@ -1088,6 +1088,7 @@ body {
         overflow: hidden;
         transition: max-height 0.3s ease;
         border-bottom: 2px solid var(--accent-gold);
+        z-index: 150;
     }
 
     .nav-menu.active {
