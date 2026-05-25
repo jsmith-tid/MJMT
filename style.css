@@ -385,7 +385,7 @@ body {
 
 @media (min-width: 768px) {
     .sticky-whatsapp {
-        display: none;
+        /* display: none; */
     }
 }
 
