@@ -37,7 +37,7 @@
                 <li><a href="#packages">Training</a></li>
                 <li><a href="coaches.html">Coaches</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="#overseas">For Overseas</a></li>
+                <li><a href="overseas.html">For Overseas</a></li>
                 <li><a href="#inquiry-form" class="cta-nav">Enquire</a></li>
             </ul>
         </nav>
@@ -48,7 +48,10 @@
         <div class="hero-content">
             <h1>Authentic Muay Thai Training</h1>
             <p>Serious Muay Thai Close Coaching in Phuket.</p>
-            <a href="#inquiry-form" class="btn btn-primary">Enquire about training</a>
+            <div class="hero-cta-group">
+                <a href="#inquiry-form" class="btn btn-primary">Enquire about training</a>
+                <a href="https://wa.me/placeholder" class="btn btn-whatsapp" target="_blank">Message us on Whatsapp</a>
+            </div>
         </div>
     </section>
 
@@ -230,8 +233,10 @@
         <div class="container">
             <h2>Ready to Train?</h2>
             <p class="inquiry-subtitle">Tell us about yourself and your training goals. We'll be in touch within 24 hours.</p>
-            
             <form class="inquiry-form" id="contact-form">
+                <p>
+                    <a href="https://wa.me/placeholder" class="btn btn-whatsapp" target="_blank" style="text-align: center;">Message us on Whatsapp</a>
+                </p>
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -245,6 +250,11 @@
                 <div class="form-group">
                     <label for="phone">Phone Number *</label>
                     <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country *</label>
+                    <input type="text" id="country" name="country" placeholder="e.g., United Kingdom" required>
                 </div>
 
                 <div class="form-group">
@@ -265,6 +275,11 @@
                         <option value="Elite Coaching Week (£750)">Elite Coaching Week (£750)</option>
                         <option value="Custom Program">Custom Program</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dates">Preferred Training Dates</label>
+                    <input type="text" id="dates" name="dates" placeholder="e.g., June 15-22, 2026 or flexible/open">
                 </div>
 
                 <div class="form-group">
