@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+
+<title>สอบถามเรื่องการฝึก - MJ Five Points Muay Thai</title>
+<meta name="description" content="ส่งคำถามเกี่ยวกับโปรแกรมฝึกมวยไทยที่ MJ Five Points Muay Thai">
+<link rel="alternate" hreflang="en" href="../index.html#inquiry-form">
+<link rel="alternate" hreflang="th" href="enquire.html">
+</head>
+<body>
+
+<header class="header">
+    <nav class="nav-container">
+        <a href="index.html" class="logo">MJ Five Points Muay Thai</a>
+        <div class="nav-right">
+            <div class="language-selector">
+                <button class="lang-btn" id="lang-toggle" title="เลือกภาษา">TH</button>
+                <div class="lang-dropdown" id="lang-dropdown">
+                    <button class="lang-option" data-lang="en">English</button>
+                    <button class="lang-option" data-lang="th">ไทย (Thai)</button>
+                    <button class="lang-option" data-lang="de">Deutsch</button>
+                    <button class="lang-option" data-lang="fr">Français</button>
+                    <button class="lang-option" data-lang="ar">العربية</button>
+                    <button class="lang-option" data-lang="ru">Русский</button>
+                    <button class="lang-option" data-lang="zh">中文</button>
+                </div>
+            </div>
+            <button class="hamburger" id="hamburger-toggle" title="เมนู">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="training.html">โปรแกรมฝึก</a></li>
+            <li><a href="coaches.html">ครูมวย</a></li>
+            <li><a href="gallery.html">แกลเลอรี</a></li>
+            <li><a href="overseas.html">มาฝึกที่ภูเก็ต</a></li>
+            <li><a href="enquire.html" class="cta-nav">สอบถาม</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<section class="hero-page">
+    <div class="hero-content">
+        <h1>สอบถามเรื่องการฝึก</h1>
+        <p>บอกเป้าหมาย ระดับ และช่วงวันที่คุณสนใจ แล้วเราจะตอบกลับภายใน 24 ชั่วโมง</p>
+    </div>
+</section>
+
+<section id="inquiry-form" class="inquiry">
+    <div class="container">
+        <h2>ส่งรายละเอียดของคุณ</h2>
+        <p class="inquiry-subtitle">หากต้องการคุยก่อน สามารถส่งข้อความทาง Whatsapp ได้เช่นกัน</p>
+        <form class="inquiry-form" id="contact-form">
+            <p>
+                <a href="https://wa.me/placeholder?text=Hi%2C%20I%27m%20interested%20in%20training%20at%20Master%20Jud%20Muay%20Thai." class="btn btn-whatsapp" target="_blank" style="text-align: center;">ส่งข้อความทาง Whatsapp</a>
+            </p>
+            <br>
+            <div class="form-group">
+                <label for="name">ชื่อ-นามสกุล *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">อีเมล *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">เบอร์โทรศัพท์ *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="country">ประเทศ / เมืองที่อยู่ *</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">ระดับประสบการณ์ *</label>
+                <select id="experience" name="experience" required>
+                    <option value="">เลือกระดับของคุณ</option>
+                    <option value="beginner">ผู้เริ่มต้น / ยังไม่เคยฝึกมวยไทย</option>
+                    <option value="intermediate">ระดับกลาง / เคยฝึกมาบ้าง</option>
+                    <option value="advanced">ขั้นสูง / มีประสบการณ์แข่งขันหรือฝึกจริงจัง</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="package">โปรแกรมที่สนใจ *</label>
+                <select id="package" name="package" required>
+                    <option value="">เลือกโปรแกรม</option>
+                    <option value="standard">Standard 7-Day Intensive - ประมาณ ฿22,000</option>
+                    <option value="elite">Elite Coaching Week - ประมาณ ฿33,000</option>
+                    <option value="custom">Custom Program</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dates">ช่วงวันที่ต้องการฝึก</label>
+                <input type="text" id="dates" name="dates" placeholder="เช่น กรกฎาคม 2026 หรือ 7 วันในเดือนสิงหาคม">
+            </div>
+            <div class="form-group">
+                <label for="message">เป้าหมายหรือรายละเอียดเพิ่มเติม</label>
+                <textarea id="message" name="message" rows="5" placeholder="บอกเราเกี่ยวกับเป้าหมาย ระดับฟิตเนส อาการบาดเจ็บ หรือสิ่งที่อยากเน้นในการฝึก"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">ส่งคำถาม</button>
+            <div id="form-message" class="form-message"></div>
+        </form>
+        <p class="form-note">เราจะตอบกลับทุกคำถามภายใน 24 ชั่วโมง</p>
+    </div>
+</section>
+
+
+<a href="https://wa.me/placeholder?text=Hi%2C%20I%27m%20interested%20in%20training%20at%20Master%20Jud%20Muay%20Thai." class="floating-whatsapp" target="_blank" aria-label="Message us on Whatsapp"></a>
+<footer class="footer">
+    <p>&copy; 2026 Master Jud Muay Thai Coaching. การฝึกมวยไทยจริงจังในภูเก็ต ประเทศไทย</p>
+    <p>Contact: jsmithtid@outlook.com</p>
+</footer>
+<script src="../script.js"></script>
+
+</body>
+</html>
