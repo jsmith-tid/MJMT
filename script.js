@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
         const hash = window.location.hash;
 
+        const coachPages = [
+            'coach-master-jud.html',
+            'coach-adam.html',
+            'coach-nawaphon.html',
+            'coach-nin.html',
+            'coach-noi.html',
+            'coach-susun.html'
+        ];
+
+        if (coachPages.includes(file)) return file.replace('.html', '');
         if (file === 'coaches.html') return 'coaches';
         if (file === 'gallery.html') return 'gallery';
         if (file === 'overseas.html') return 'overseas';
@@ -33,7 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
             coaches: 'coaches.html',
             gallery: 'gallery.html',
             overseas: 'overseas.html',
-            enquire: 'enquire.html'
+            enquire: 'enquire.html',
+            'coach-master-jud': 'coach-master-jud.html',
+            'coach-adam': 'coach-adam.html',
+            'coach-nawaphon': 'coach-nawaphon.html',
+            'coach-nin': 'coach-nin.html',
+            'coach-noi': 'coach-noi.html',
+            'coach-susun': 'coach-susun.html'
         };
         const englishUrls = {
             home: '../index.html',
@@ -41,7 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
             coaches: '../coaches.html',
             gallery: '../gallery.html',
             overseas: '../overseas.html',
-            enquire: '../index.html#inquiry-form'
+            enquire: '../index.html#inquiry-form',
+            'coach-master-jud': '../coach-master-jud.html',
+            'coach-adam': '../coach-adam.html',
+            'coach-nawaphon': '../coach-nawaphon.html',
+            'coach-nin': '../coach-nin.html',
+            'coach-noi': '../coach-noi.html',
+            'coach-susun': '../coach-susun.html'
         };
 
         if (lang === 'th') {
