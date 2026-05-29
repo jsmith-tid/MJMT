@@ -52,6 +52,47 @@
             <div class="profile-content">
                 <div class="profile-image">
                     <img src="images/Master-Jud-3040879388.jpg" alt="Master Jud">
+                    <div class="coach-thumb-strip" aria-label="Master Jud career photos">
+                        <button class="coach-thumb" type="button" data-image="images/01. Master Jud.jpg" data-caption="Master Jud during his earlier years in Muay Thai, building the fighting experience that shaped his coaching.">
+                            <img src="images/01. Master Jud.jpg" alt="Master Jud career photo 1">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/02. Master Jud.jpg" data-caption="A glimpse into Master Jud's old-school Muay Thai background and the standards he brings to training today.">
+                            <img src="images/02. Master Jud.jpg" alt="Master Jud career photo 2">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/03. Master Jud.jpg" data-caption="Photos from Master Jud's long journey through Muay Thai help show the depth behind his coaching.">
+                            <img src="images/03. Master Jud.jpg" alt="Master Jud career photo 3">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/04. Master Jud.jpg" data-caption="From fighting to coaching, Master Jud's experience is rooted in practical ring knowledge.">
+                            <img src="images/04. Master Jud.jpg" alt="Master Jud career photo 4">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/05. Master Jud.jpg" data-caption="Master Jud's history in the sport gives students a direct link to authentic Muay Thai teaching.">
+                            <img src="images/05. Master Jud.jpg" alt="Master Jud career photo 5">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/06. Master Jud.jpg" data-caption="A career shaped by hard training, competition and years spent developing fighters.">
+                            <img src="images/06. Master Jud.jpg" alt="Master Jud career photo 6">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/07. Master Jud.jpg" data-caption="Master Jud's coaching reputation comes from decades of work inside real Muay Thai camps.">
+                            <img src="images/07. Master Jud.jpg" alt="Master Jud career photo 7">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/08. Master Jud.jpg" data-caption="Training champions requires detail, discipline and the ability to read each fighter clearly.">
+                            <img src="images/08. Master Jud.jpg" alt="Master Jud career photo 8">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/09. Master Jud.jpg" data-caption="A visual record of the experience behind Master Jud's direct, no-frills coaching style.">
+                            <img src="images/09. Master Jud.jpg" alt="Master Jud career photo 9">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/10. Master Jud.jpg" data-caption="Master Jud has spent his life around Muay Thai, from his own fighting days to developing elite athletes.">
+                            <img src="images/10. Master Jud.jpg" alt="Master Jud career photo 10">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/11. Master Jud.jpg" data-caption="These moments help show the background students are learning from when they train with Master Jud.">
+                            <img src="images/11. Master Jud.jpg" alt="Master Jud career photo 11">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/12. Master Jud.jpg" data-caption="Master Jud's path through Muay Thai connects traditional camp training with modern international students.">
+                            <img src="images/12. Master Jud.jpg" alt="Master Jud career photo 12">
+                        </button>
+                        <button class="coach-thumb" type="button" data-image="images/13. Master Jud.png" data-caption="A later moment from Master Jud's career, reflecting the respect he has earned as a trainer.">
+                            <img src="images/13. Master Jud.png" alt="Master Jud career photo 13">
+                        </button>
+                    </div>
                 </div>
                 <div class="profile-info">
                     <h1>Master Jud</h1>
@@ -114,6 +155,12 @@
         </div>
     </section>
 
+    <div id="coach-lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-image" src="" alt="">
+        <p class="lightbox-caption" id="coach-lightbox-caption"></p>
+    </div>
+
     <!-- Sticky WhatsApp Button (Mobile Only) -->
     <a href="https://wa.me/placeholder" class="sticky-whatsapp" target="_blank" title="Message us on WhatsApp">
         <span class="whatsapp-icon">💬</span>
@@ -128,5 +175,33 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        const coachLightbox = document.getElementById('coach-lightbox');
+        const coachLightboxImage = coachLightbox.querySelector('.lightbox-image');
+        const coachLightboxCaption = document.getElementById('coach-lightbox-caption');
+
+        document.querySelectorAll('.coach-thumb').forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                coachLightboxImage.src = thumb.dataset.image;
+                coachLightboxImage.alt = thumb.dataset.caption;
+                coachLightboxCaption.textContent = thumb.dataset.caption;
+                coachLightbox.style.display = 'flex';
+            });
+        });
+
+        function closeCoachLightbox() {
+            coachLightbox.style.display = 'none';
+        }
+
+        coachLightbox.querySelector('.lightbox-close').addEventListener('click', closeCoachLightbox);
+        coachLightbox.addEventListener('click', (event) => {
+            if (event.target.id === 'coach-lightbox') closeCoachLightbox();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && coachLightbox.style.display === 'flex') {
+                closeCoachLightbox();
+            }
+        });
+    </script>
 </body>
 </html>

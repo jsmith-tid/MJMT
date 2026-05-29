@@ -996,6 +996,39 @@ body {
     display: block;
 }
 
+.coach-thumb-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.coach-thumb {
+    aspect-ratio: 1;
+    padding: 0;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--primary-light);
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.coach-thumb:hover,
+.coach-thumb:focus-visible {
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.coach-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    border-radius: 0;
+}
+
 .profile-info h1 {
     font-size: 3rem;
     color: var(--text-light);
@@ -1084,6 +1117,18 @@ body {
 
     .profile-image {
         position: static;
+    }
+
+    .coach-thumb-strip {
+        grid-template-columns: repeat(6, minmax(64px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scroll-snap-type: x proximity;
+    }
+
+    .coach-thumb {
+        min-width: 64px;
+        scroll-snap-align: start;
     }
 
     .profile-info h1 {
