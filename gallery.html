@@ -65,6 +65,7 @@
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-image" src="" alt="">
+        <p class="lightbox-caption" id="lightbox-caption"></p>
         <div class="lightbox-nav">
             <button class="lightbox-prev">&#10094;</button>
             <button class="lightbox-next">&#10095;</button>
@@ -88,25 +89,82 @@
     <script>
         // Gallery image data
         const galleryImages = [
-            'Coach Adam 01.jpg',
-            'Coach Adam 02.jpg',
-            'Coach Nawaphon Chanmanee 01.jpg',
-            'Coach Nawaphon Chanmanee 02.jpg',
-            'Coach Nin 01.jpg',
-            'Coach Nin 02.jpg',
-            'Coach Nin 03.jpg',
-            'Coach Noi 01.jpg',
-            'Coach Noi 02.jpg',
-            'Coach Susun 01.jpg',
-            'Coach Susun 02.jpg',
-            'Coach Susun 03.jpg',
-            'Master Jud with Buakaw.jpg',
-            'Master Jud.jpg',
-            'Master-Jud-3040879388.jpg',
-            'Master-Jud-with-Buakaw.jpg',
-            'maxresdefault-1141276480.jpg',
-            'media-3510629413.webp',
-            'OIP-41752969.jpg'
+            {
+                src: 'Coach Adam 01.jpg',
+                caption: 'Coach Adam brings calm, technical focus to pad work and close coaching.'
+            },
+            {
+                src: 'Coach Adam 02.jpg',
+                caption: 'One-to-one rounds help students sharpen timing, balance and clean striking habits.'
+            },
+            {
+                src: 'Coach Nawaphon Chanmanee 01.jpg',
+                caption: 'Nawaphon Chanmanee shares professional ring experience with students of all levels.'
+            },
+            {
+                src: 'Coach Nawaphon Chanmanee 02.jpg',
+                caption: 'Focused coaching sessions break down details that make technique sharper and safer.'
+            },
+            {
+                src: 'Coach Nin 01.jpg',
+                caption: 'Coach Nin works on the fundamentals that serious Muay Thai training is built on.'
+            },
+            {
+                src: 'Coach Nin 02.jpg',
+                caption: 'Hard rounds, simple corrections and steady repetition keep the training honest.'
+            },
+            {
+                src: 'Coach Nin 03.jpg',
+                caption: 'Conditioning and ring craft are trained together, not treated as separate work.'
+            },
+            {
+                src: 'Coach Noi 01.jpg',
+                caption: 'Coach Noi helps students build strong basics before adding speed and power.'
+            },
+            {
+                src: 'Coach Noi 02.jpg',
+                caption: 'Small technical adjustments can change how a punch, kick, knee or elbow lands.'
+            },
+            {
+                src: 'Coach Susun 01.jpg',
+                caption: 'Coach Susun brings energy and pressure to sessions built around real improvement.'
+            },
+            {
+                src: 'Coach Susun 02.jpg',
+                caption: 'Pad work at MJ Five Points is direct, practical and designed to expose bad habits.'
+            },
+            {
+                src: 'Coach Susun 03.jpg',
+                caption: 'Training here is not a resort activity. It is work, repetition and attention.'
+            },
+            {
+                src: 'Master Jud with Buakaw.jpg',
+                caption: 'Master Jud with Buakaw, reflecting the gym\'s connection to elite Muay Thai experience.'
+            },
+            {
+                src: 'Master Jud.jpg',
+                caption: 'Master Jud founded the gym around old-school standards, discipline and authentic coaching.'
+            },
+            {
+                src: 'Master-Jud-3040879388.jpg',
+                caption: 'Decades of coaching experience shape the atmosphere and expectations inside the gym.'
+            },
+            {
+                src: 'Master-Jud-with-Buakaw.jpg',
+                caption: 'A reminder of the level of Muay Thai knowledge behind the coaching team.'
+            },
+            {
+                src: 'maxresdefault-1141276480.jpg',
+                caption: 'The gym setting is simple and practical, with the focus kept on training.'
+            },
+            {
+                src: 'media-3510629413.webp',
+                caption: 'Students come here to improve their Muay Thai through consistent, guided work.'
+            },
+            {
+                src: 'OIP-41752969.jpg',
+                caption: 'Authentic training in Phuket for people who want more than a fitness holiday.'
+            }
         ];
 
         let currentImageIndex = 0;
@@ -117,18 +175,26 @@
             galleryImages.forEach((img, index) => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
-                item.innerHTML = `<img src="images/${img}" alt="Gallery image ${index + 1}" data-index="${index}">`;
+                item.innerHTML = `<img src="images/${img.src}" alt="Gallery image ${index + 1}" data-index="${index}" data-caption="${img.caption}">`;
                 item.addEventListener('click', () => openLightbox(index));
                 gallery.appendChild(item);
             });
+        }
+
+        function updateLightboxImage() {
+            const imageData = galleryImages[currentImageIndex];
+            const img = document.querySelector('.lightbox-image');
+            const caption = document.getElementById('lightbox-caption');
+            img.src = `images/${imageData.src}`;
+            img.alt = imageData.caption;
+            caption.textContent = imageData.caption;
         }
 
         // Lightbox functions
         function openLightbox(index) {
             currentImageIndex = index;
             const lightbox = document.getElementById('lightbox');
-            const img = document.querySelector('.lightbox-image');
-            img.src = `images/${galleryImages[index]}`;
+            updateLightboxImage();
             lightbox.style.display = 'flex';
         }
 
@@ -138,12 +204,12 @@
 
         function nextImage() {
             currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-            document.querySelector('.lightbox-image').src = `images/${galleryImages[currentImageIndex]}`;
+            updateLightboxImage();
         }
 
         function prevImage() {
             currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-            document.querySelector('.lightbox-image').src = `images/${galleryImages[currentImageIndex]}`;
+            updateLightboxImage();
         }
 
         // Event listeners

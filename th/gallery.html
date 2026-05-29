@@ -66,24 +66,63 @@
 <div class="lightbox" id="lightbox">
     <span class="lightbox-close">&times;</span>
     <img class="lightbox-image" src="" alt="รูปภาพจากแกลเลอรี">
-    <button class="lightbox-prev">&#10094;</button>
-    <button class="lightbox-next">&#10095;</button>
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <div class="lightbox-nav">
+        <button class="lightbox-prev">&#10094;</button>
+        <button class="lightbox-next">&#10095;</button>
+    </div>
 </div>
 
 <script>
 const galleryImages = [
-    'Coach Adam 01.jpg',
-    'Coach Nawaphon Chanmanee 01.jpg',
-    'Coach Nin 01.jpg',
-    'Coach Noi 01.jpg',
-    'Coach Susun 01.jpg',
-    'Master Jud with Buakaw.jpg',
-    'Master Jud.jpg',
-    'Master-Jud-3040879388.jpg',
-    'Master-Jud-with-Buakaw.jpg',
-    'maxresdefault-1141276480.jpg',
-    'media-3510629413.webp',
-    'OIP-41752969.jpg'
+    {
+        src: 'Coach Adam 01.jpg',
+        caption: 'โค้ช Adam เน้นการฝึกเทคนิคแบบใกล้ชิด ชัดเจน และใช้งานได้จริง'
+    },
+    {
+        src: 'Coach Nawaphon Chanmanee 01.jpg',
+        caption: 'Nawaphon Chanmanee ถ่ายทอดประสบการณ์จากเวทีมวยอาชีพให้กับผู้ฝึกทุกระดับ'
+    },
+    {
+        src: 'Coach Nin 01.jpg',
+        caption: 'โค้ช Nin ช่วยวางพื้นฐานมวยไทยให้แน่น ก่อนเพิ่มความเร็วและความหนัก'
+    },
+    {
+        src: 'Coach Noi 01.jpg',
+        caption: 'โค้ช Noi ให้ความสำคัญกับท่าพื้นฐาน การทรงตัว และจังหวะที่ถูกต้อง'
+    },
+    {
+        src: 'Coach Susun 01.jpg',
+        caption: 'โค้ช Susun ฝึกด้วยพลัง ความจริงจัง และเป้าหมายให้ผู้เรียนพัฒนาขึ้นจริง'
+    },
+    {
+        src: 'Master Jud with Buakaw.jpg',
+        caption: 'Master Jud กับ Buakaw สะท้อนประสบการณ์ระดับสูงที่อยู่เบื้องหลังทีมครูมวย'
+    },
+    {
+        src: 'Master Jud.jpg',
+        caption: 'Master Jud สร้างยิมนี้ด้วยมาตรฐานมวยไทยแบบดั้งเดิม วินัย และการฝึกจริง'
+    },
+    {
+        src: 'Master-Jud-3040879388.jpg',
+        caption: 'ประสบการณ์การสอนหลายสิบปีของ Master Jud กำหนดบรรยากาศการฝึกในยิม'
+    },
+    {
+        src: 'Master-Jud-with-Buakaw.jpg',
+        caption: 'ภาพนี้ย้ำถึงความรู้และประสบการณ์มวยไทยที่ทีมครูนำมาใช้ในการฝึก'
+    },
+    {
+        src: 'maxresdefault-1141276480.jpg',
+        caption: 'บรรยากาศยิมเรียบง่าย ใช้งานจริง และให้ความสำคัญกับการฝึกมากกว่าความหรูหรา'
+    },
+    {
+        src: 'media-3510629413.webp',
+        caption: 'ผู้เรียนมาที่นี่เพื่อพัฒนามวยไทยผ่านการฝึกซ้ำ การแก้ไข และคำแนะนำจากครู'
+    },
+    {
+        src: 'OIP-41752969.jpg',
+        caption: 'การฝึกมวยไทยแท้ในภูเก็ต สำหรับคนที่ต้องการมากกว่ากิจกรรมท่องเที่ยว'
+    }
 ];
 let currentImageIndex = 0;
 function loadGallery() {
@@ -92,16 +131,23 @@ function loadGallery() {
     galleryImages.forEach((img, index) => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
-        item.innerHTML = `<img src="../images/${img}" alt="ภาพการฝึก ${index + 1}" data-index="${index}">`;
+        item.innerHTML = `<img src="../images/${img.src}" alt="ภาพการฝึก ${index + 1}" data-index="${index}" data-caption="${img.caption}">`;
         item.addEventListener('click', () => openLightbox(index));
         gallery.appendChild(item);
     });
 }
+function updateLightboxImage() {
+    const imageData = galleryImages[currentImageIndex];
+    const img = document.querySelector('.lightbox-image');
+    const caption = document.getElementById('lightbox-caption');
+    img.src = `../images/${imageData.src}`;
+    img.alt = imageData.caption;
+    caption.textContent = imageData.caption;
+}
 function openLightbox(index) {
     currentImageIndex = index;
     const lightbox = document.getElementById('lightbox');
-    const img = document.querySelector('.lightbox-image');
-    img.src = `../images/${galleryImages[index]}`;
+    updateLightboxImage();
     lightbox.style.display = 'flex';
 }
 function closeLightbox() {
@@ -109,11 +155,11 @@ function closeLightbox() {
 }
 function nextImage() {
     currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-    document.querySelector('.lightbox-image').src = `../images/${galleryImages[currentImageIndex]}`;
+    updateLightboxImage();
 }
 function prevImage() {
     currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-    document.querySelector('.lightbox-image').src = `../images/${galleryImages[currentImageIndex]}`;
+    updateLightboxImage();
 }
 window.addEventListener('load', loadGallery);
 document.addEventListener('DOMContentLoaded', () => {
