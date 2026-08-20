@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Training - MJ Five Points Muay Thai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">MJ Five Points Muay Thai</a>
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="lang-btn" id="lang-toggle" title="Select Language">EN</button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <button class="lang-option" data-lang="en">English</button>
+                        <button class="lang-option" data-lang="th">ไทย (Thai)</button>
+                        <button class="lang-option" data-lang="de">Deutsch</button>
+                        <button class="lang-option" data-lang="fr">Français</button>
+                        <button class="lang-option" data-lang="ar">العربية</button>
+                        <button class="lang-option" data-lang="ru">Русский</button>
+                        <button class="lang-option" data-lang="zh">中文</button>
+                    </div>
+                </div>
+                <button class="hamburger" id="hamburger-toggle" title="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#packages">Training</a></li>
+                <li><a href="coaches.html">Coaches</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="overseas.html">For Overseas</a></li>
+                <li><a href="book.html" class="cta-nav">Book</a></li>
+                <li><a href="index.html#inquiry-form" class="cta-nav">Enquire</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-page">
+        <div class="hero-content">
+            <h1>Book Training</h1>
+            <p>Reserve your Muay Thai training week in Phuket</p>
+        </div>
+    </section>
+
+    <!-- Booking Journey -->
+    <section class="booking-page">
+        <div class="container">
+            <div class="booking-overview">
+                <div class="booking-panel">
+                    <span class="step-number">1</span>
+                    <h3>Choose your program</h3>
+                    <p>Select the Standard 7-Day Intensive or Elite Coaching Week.</p>
+                </div>
+                <div class="booking-panel">
+                    <span class="step-number">2</span>
+                    <h3>Share your dates</h3>
+                    <p>Tell us when you want to train and whether your travel plans are already fixed.</p>
+                </div>
+                <div class="booking-panel">
+                    <span class="step-number">3</span>
+                    <h3>Confirm with us</h3>
+                    <p>We will check availability, answer practical questions, and confirm next steps.</p>
+                </div>
+            </div>
+
+            <form class="inquiry-form booking-form" id="contact-form">
+                <input type="hidden" name="form_type" value="Training booking">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <input type="text" id="country" name="country" placeholder="e.g., United Kingdom" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="package">Program *</label>
+                    <select id="package" name="package" required>
+                        <option value="">Select a program</option>
+                        <option value="Standard 7-Day Intensive (£500)">Standard 7-Day Intensive (£500)</option>
+                        <option value="Elite Coaching Week (£750)">Elite Coaching Week (£750)</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start-date">Preferred Start Date *</label>
+                        <input type="date" id="start-date" name="preferred_start_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Training Duration *</label>
+                        <select id="duration" name="duration" required>
+                            <option value="">Select duration</option>
+                            <option value="7 days">7 days</option>
+                            <option value="More than 7 days">More than 7 days</option>
+                            <option value="Flexible / not sure yet">Flexible / not sure yet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience">Experience Level *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select your level</option>
+                            <option value="Beginner">Beginner (New to Muay Thai)</option>
+                            <option value="Intermediate">Intermediate (Some training experience)</option>
+                            <option value="Advanced">Advanced (Competitive experience)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accommodation">Accommodation Help</label>
+                        <select id="accommodation" name="accommodation_help">
+                            <option value="">Select an option</option>
+                            <option value="Yes, please send recommendations">Yes, please send recommendations</option>
+                            <option value="No, I have accommodation">No, I have accommodation</option>
+                            <option value="Not sure yet">Not sure yet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Anything we should know?</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your goals, injuries, travel plans, or questions."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">Send booking request</button>
+                <p class="form-note">We will check availability and reply within 24 hours.</p>
+            </form>
+
+            <div id="form-message" class="form-message"></div>
+        </div>
+    </section>
+
+    <!-- Sticky WhatsApp Button (Mobile Only) -->
+    <a href="https://wa.me/placeholder" class="sticky-whatsapp" target="_blank" title="Message us on WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-cta">
+                <h2>Ready to Train in Phuket?</h2>
+                <p>Book a training week or send us a question before you travel.</p>
+                <div class="cta-actions footer-actions">
+                    <a href="book.html" class="btn btn-primary">Book now</a>
+                    <a href="index.html#inquiry-form" class="btn btn-secondary">Enquire</a>
+                </div>
+            </div>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#packages">Training</a>
+                    <a href="coaches.html">Coaches</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="overseas.html">For Overseas</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Book</h3>
+                    <a href="book.html">Book Training</a>
+                    <a href="index.html#inquiry-form">Enquire</a>
+                    <a href="https://wa.me/placeholder" target="_blank">WhatsApp</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Travel Info</h3>
+                    <a href="overseas.html#location">Location & Getting Here</a>
+                    <a href="overseas.html#accommodation">Accommodation</a>
+                    <a href="overseas.html#what-to-bring">What to Bring</a>
+                    <a href="overseas.html#health-safety">Health & Safety</a>
+                    <a href="overseas.html#visa-entry">Visa & Entry</a>
+                    <a href="overseas.html#before-you-arrive">Before You Arrive</a>
+                    <a href="overseas.html#faq">FAQ</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <a href="mailto:jsmithtid@outlook.com">jsmithtid@outlook.com</a>
+                    <span>Phuket, Thailand</span>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Master Jud Muay Thai Coaching. Authentic training in Phuket, Thailand.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

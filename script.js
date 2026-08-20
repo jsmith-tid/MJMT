@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (file === 'coaches.html') return 'coaches';
         if (file === 'gallery.html') return 'gallery';
         if (file === 'overseas.html') return 'overseas';
+        if (file === 'book.html') return 'book';
         if (file === 'training.html') return 'training';
         if (file === 'enquire.html') return 'enquire';
         if (hash === '#packages') return 'training';
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             coaches: 'coaches.html',
             gallery: 'gallery.html',
             overseas: 'overseas.html',
+            book: 'index.html#inquiry-form',
             enquire: 'enquire.html',
             'coach-master-jud': 'coach-master-jud.html',
             'coach-adam': 'coach-adam.html',
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             coaches: '../coaches.html',
             gallery: '../gallery.html',
             overseas: '../overseas.html',
+            book: '../book.html',
             enquire: '../index.html#inquiry-form',
             'coach-master-jud': '../coach-master-jud.html',
             'coach-adam': '../coach-adam.html',
@@ -147,14 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const formData = new FormData(form);
             const message = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                country: formData.get('country'),
-                experience: formData.get('experience'),
-                package: formData.get('package'),
-                dates: formData.get('dates'),
-                message: formData.get('message'),
+                ...Object.fromEntries(formData.entries()),
                 page_language: pageLang,
                 timestamp: new Date().toISOString()
             };
