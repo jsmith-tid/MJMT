@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             coaches: 'coaches.html',
             gallery: 'gallery.html',
             overseas: 'overseas.html',
-            book: 'index.html#inquiry-form',
+            book: 'book.html',
             enquire: 'enquire.html',
             'coach-master-jud': 'coach-master-jud.html',
             'coach-adam': 'coach-adam.html',

@@ -1102,6 +1102,11 @@ body {
     line-height: 1.5;
 }
 
+.choice-card .choice-note {
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
 .booking-branch {
     margin-top: 28px;
     padding-top: 5px;

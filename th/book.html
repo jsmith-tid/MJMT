@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จองการฝึก - MJ Five Points Muay Thai</title>
+    <meta name="description" content="ส่งคำขอจองโปรแกรมหรือจองรอบฝึกมวยไทยส่วนตัวในภูเก็ต">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="alternate" hreflang="en" href="../book.html">
+    <link rel="alternate" hreflang="th" href="book.html">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">MJ Five Points Muay Thai</a>
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="lang-btn" id="lang-toggle" title="เลือกภาษา">TH</button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <button class="lang-option" data-lang="en">English</button>
+                        <button class="lang-option" data-lang="th">ไทย (Thai)</button>
+                        <button class="lang-option" data-lang="de">Deutsch</button>
+                        <button class="lang-option" data-lang="fr">Français</button>
+                        <button class="lang-option" data-lang="ar">العربية</button>
+                        <button class="lang-option" data-lang="ru">Русский</button>
+                        <button class="lang-option" data-lang="zh">中文</button>
+                    </div>
+                </div>
+                <button class="hamburger" id="hamburger-toggle" title="เมนู"><span></span><span></span><span></span></button>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="training.html">โปรแกรมฝึก</a></li>
+                <li><a href="coaches.html">ครูมวย</a></li>
+                <li><a href="gallery.html">แกลเลอรี</a></li>
+                <li><a href="overseas.html">มาฝึกที่ภูเก็ต</a></li>
+                <li><a href="book.html" class="cta-nav">จอง</a></li>
+                <li><a href="enquire.html" class="cta-nav">สอบถาม</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-page">
+        <div class="hero-content">
+            <h1>จองการฝึก</h1>
+            <p>ส่งคำขอจองโปรแกรมหรือจองรอบฝึกส่วนตัวในภูเก็ต</p>
+        </div>
+    </section>
+
+    <main class="booking-page">
+        <div class="container booking-shell" id="booking-app">
+            <ol class="booking-progress" aria-label="ขั้นตอนการจอง">
+                <li class="active" data-progress="1"><span>1</span> เลือกการฝึก</li>
+                <li data-progress="2"><span>2</span> ข้อมูลของคุณ</li>
+                <li data-progress="3"><span>3</span> ชำระเงิน</li>
+                <li data-progress="4"><span>4</span> เสร็จสิ้น</li>
+            </ol>
+
+            <div class="booking-card">
+                <section class="booking-step active" data-step="1">
+                    <p class="eyebrow">ขั้นตอนที่ 1 จาก 3</p>
+                    <h2>คุณต้องการจองอะไร?</h2>
+                    <div class="choice-grid booking-type-grid">
+                        <label class="choice-card">
+                            <input type="radio" name="booking-type" value="programme">
+                            <span><strong>โปรแกรมฝึก</strong><small>เลือกโปรแกรม 7 วันและแจ้งวันที่ต้องการเริ่มฝึก</small><small class="choice-note">ต้องชำระมัดจำ 20% และสามารถขอคืนได้</small></span>
+                        </label>
+                        <label class="choice-card">
+                            <input type="radio" name="booking-type" value="session">
+                            <span><strong>รอบฝึกส่วนตัว</strong><small>จองรอบฝึกหนึ่งชั่วโมงกับครูมวยที่คุณเลือกได้ตั้งแต่หนึ่งรอบขึ้นไป</small><small class="choice-note">คุณสามารถชำระเงินเต็มจำนวนทางออนไลน์ได้</small></span>
+                        </label>
+                    </div>
+
+                    <div id="programme-options" class="booking-branch" hidden>
+                        <h3>เลือกโปรแกรมของคุณ</h3>
+                        <div class="choice-grid">
+                            <label class="choice-card"><input type="radio" name="programme" value="standard" data-price="500"><span><strong>Standard 7-Day Intensive</strong><small>£500 · ซ้อมกลุ่มวันละ 2 รอบ และฝึกส่วนตัววันละ 1 รอบ</small></span></label>
+                            <label class="choice-card"><input type="radio" name="programme" value="elite" data-price="750"><span><strong>Elite Coaching Week</strong><small>£750 · โปรแกรมขั้นสูงพร้อมฝึกกับ Master Jud ทุกวัน</small></span></label>
+                        </div>
+                        <div class="form-group booking-date-field">
+                            <label for="programme-date">วันที่ต้องการเริ่มฝึก *</label>
+                            <input type="date" id="programme-date">
+                            <p class="field-help">วันที่นี้เป็นวันที่คุณต้องการ ยังไม่ถือว่าได้รับการยืนยัน ยิมจะติดต่อกลับเพื่อยืนยันว่ามีที่ว่างหรือไม่</p>
+                        </div>
+                    </div>
+
+                    <div id="session-options" class="booking-branch" hidden>
+                        <div class="branch-heading">
+                            <div><h3>จัดรอบฝึกส่วนตัวของคุณ</h3><p>แต่ละรอบใช้เวลา 1 ชั่วโมง และคุณสามารถเลือกครูมวยคนละคนในแต่ละรอบได้</p></div>
+                            <span class="timezone-badge">เวลาภูเก็ต · ICT (UTC+7)</span>
+                        </div>
+                        <fieldset class="booking-order">
+                            <legend>คุณต้องการค้นหารอบฝึกแบบใด?</legend>
+                            <label><input type="radio" name="booking-order" value="coach" checked> เลือกครูมวยก่อน</label>
+                            <label><input type="radio" name="booking-order" value="time"> เลือกวันและเวลาก่อน</label>
+                        </fieldset>
+                        <div class="session-picker" id="session-picker">
+                            <div class="form-group" data-picker="coach"><label for="session-coach">ครูมวย</label><select id="session-coach"></select></div>
+                            <div class="form-group"><label for="session-date">วันที่</label><select id="session-date"></select></div>
+                            <div class="form-group"><label for="session-time">เวลา</label><select id="session-time"></select></div>
+                            <div class="form-group" data-picker="available-coach" hidden><label for="available-coach">ครูมวยที่ว่าง</label><select id="available-coach"></select></div>
+                            <button type="button" class="btn btn-secondary add-session" id="add-session">เพิ่มรอบฝึก</button>
+                        </div>
+                        <p class="field-help">เวลาว่างในต้นแบบนี้ใช้เพื่อการสาธิต เปิดให้ฝึกทุกวัน เวลา 9:00–18:00 น.</p>
+                        <div id="session-basket" class="session-basket" aria-live="polite"></div>
+                    </div>
+
+                    <p class="booking-error" id="selection-error" role="alert"></p>
+                    <div class="step-actions"><button type="button" class="btn btn-primary btn-large" data-next="2">ดำเนินการต่อ</button></div>
+                </section>
+
+                <section class="booking-step" data-step="2" hidden>
+                    <p class="eyebrow">ขั้นตอนที่ 2 จาก 3</p>
+                    <h2>ข้อมูลของคุณ</h2>
+                    <form id="details-form">
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-name">ชื่อ-นามสกุล *</label><input id="booking-name" autocomplete="name" required></div>
+                            <div class="form-group"><label for="booking-email">อีเมล *</label><input type="email" id="booking-email" autocomplete="email" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-phone">เบอร์โทรศัพท์ *</label><input type="tel" id="booking-phone" autocomplete="tel" required></div>
+                            <div class="form-group"><label for="booking-country">ประเทศ *</label><input id="booking-country" autocomplete="country-name" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-experience">ระดับประสบการณ์ *</label><select id="booking-experience" required><option value="">เลือกระดับของคุณ</option><option>ผู้เริ่มต้น</option><option>ระดับกลาง</option><option>ขั้นสูง</option></select></div>
+                            <div class="form-group" id="accommodation-group"><label for="booking-accommodation">ต้องการความช่วยเหลือเรื่องที่พักหรือไม่?</label><select id="booking-accommodation"><option>ไม่ต้องการ ขอบคุณ</option><option>ต้องการ กรุณาส่งคำแนะนำมาให้</option><option>ยังไม่แน่ใจ</option></select></div>
+                        </div>
+                        <div class="form-group"><label for="booking-notes">มีอะไรที่เราควรทราบเพิ่มเติมหรือไม่?</label><textarea id="booking-notes" rows="4" placeholder="บอกเราเกี่ยวกับเป้าหมาย อาการบาดเจ็บ หรือคำถามของคุณ"></textarea></div>
+                    </form>
+                    <div class="step-actions"><button type="button" class="btn btn-secondary" data-back="1">ย้อนกลับ</button><button type="button" class="btn btn-primary btn-large" data-next="3">ตรวจสอบการชำระเงิน</button></div>
+                </section>
+
+                <section class="booking-step" data-step="3" hidden>
+                    <p class="eyebrow">ขั้นตอนที่ 3 จาก 3</p>
+                    <h2>ตรวจสอบและชำระเงิน</h2>
+                    <div id="booking-summary" class="booking-summary"></div>
+                    <fieldset id="programme-payment-options" class="payment-choice" hidden>
+                        <legend>คุณต้องการชำระเท่าไร?</legend>
+                        <label class="choice-card"><input type="radio" name="payment-amount" value="deposit" checked><span><strong id="deposit-label">ชำระมัดจำ 20% แบบขอคืนได้</strong><small>ยิมจะติดต่อคุณเกี่ยวกับวันที่ต้องการเริ่มฝึก และคุณสามารถขอคืนเงินมัดจำได้</small></span></label>
+                        <label class="choice-card"><input type="radio" name="payment-amount" value="full"><span><strong id="full-label">ชำระเต็มจำนวน</strong><small>การจองโปรแกรมยังต้องรอการยืนยันจากยิม</small></span></label>
+                    </fieldset>
+                    <div class="prototype-notice"><strong>การชำระเงินในต้นแบบ</strong><br>ไม่มีการเรียกเก็บเงินจริง และข้อมูลบัตรด้านล่างจะไม่ถูกส่งหรือบันทึก</div>
+                    <form id="payment-form" class="payment-form">
+                        <div class="form-group"><label for="card-name">ชื่อบนบัตร *</label><input id="card-name" autocomplete="cc-name" required></div>
+                        <div class="form-group"><label for="card-number">หมายเลขบัตร *</label><input id="card-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required></div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="card-expiry">วันหมดอายุ *</label><input id="card-expiry" autocomplete="cc-exp" placeholder="MM/YY" required></div>
+                            <div class="form-group"><label for="card-cvc">รหัสความปลอดภัย *</label><input id="card-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" required></div>
+                        </div>
+                    </form>
+                    <p class="booking-error" id="payment-error" role="alert"></p>
+                    <div class="step-actions"><button type="button" class="btn btn-secondary" data-back="2">ย้อนกลับ</button><button type="button" class="btn btn-primary btn-large" id="pay-button">ชำระเงินในต้นแบบ</button></div>
+                </section>
+
+                <section class="booking-step confirmation-step" data-step="4" hidden>
+                    <div class="confirmation-mark">✓</div>
+                    <p class="eyebrow">ชำระเงินเสร็จสิ้น</p>
+                    <h2 id="confirmation-title">การจองของคุณเสร็จสมบูรณ์</h2>
+                    <p id="confirmation-message"></p>
+                    <div id="confirmation-summary" class="booking-summary"></div>
+                    <p class="form-note">โปรดเก็บหมายเลขอ้างอิงไว้ ระบบเปลี่ยนหรือยกเลิกการจองจะเพิ่มเข้ามาในภายหลัง ระหว่างนี้โปรดติดต่อยิมโดยตรง</p>
+                    <a href="index.html" class="btn btn-primary">กลับไปหน้าแรก</a>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <a href="https://wa.me/placeholder" class="sticky-whatsapp" target="_blank" title="ส่งข้อความทาง WhatsApp"><span class="whatsapp-icon">💬</span></a>
+    <footer class="footer">
+        <p>&copy; 2026 Master Jud Muay Thai Coaching. การฝึกมวยไทยจริงจังในภูเก็ต ประเทศไทย</p>
+        <p>ติดต่อ: jsmithtid@outlook.com</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script src="../booking.js"></script>
+</body>
+</html>

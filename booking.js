@@ -16,6 +16,38 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     const times = Array.from({ length: 9 }, (_, index) => `${String(index + 9).padStart(2, '0')}:00`);
     const state = { type: '', sessions: [] };
+    const isThai = document.documentElement.lang.toLowerCase().startsWith('th');
+    const copy = isThai ? {
+        locale: 'th-TH', coachPrice: (name, price) => `${name} · £${price}`,
+        time: (start, end) => `${start}:00–${end}:00 น.`, noSessions: 'ยังไม่ได้เพิ่มรอบฝึก',
+        phuketTime: 'เวลาภูเก็ต', remove: 'ลบ', total: 'รวม', overlap: 'คุณมีรอบฝึกในเวลานี้แล้ว กรุณาเลือกช่วงเวลาอื่น',
+        chooseType: 'เลือกโปรแกรมฝึกหรือรอบฝึกส่วนตัว', chooseProgramme: 'เลือกโปรแกรมฝึก',
+        chooseDate: 'เลือกวันที่ต้องการเริ่มฝึก', addSession: 'เพิ่มรอบฝึกส่วนตัวอย่างน้อย 1 รอบ',
+        programme: 'โปรแกรม', preferredStart: 'วันที่ต้องการเริ่ม', awaiting: 'ส่งคำขอแล้ว รอการยืนยันจากยิม',
+        programmePrice: 'ราคาโปรแกรม', paid: 'ชำระแล้วในต้นแบบ', depositPaid: 'ชำระมัดจำแบบขอคืนได้แล้วในต้นแบบ',
+        arrivalBalance: 'ยอดที่ต้องชำระเมื่อมาถึง', session: 'รอบฝึก', totalToPay: 'ยอดที่ต้องชำระ',
+        depositLabel: amount => `ชำระมัดจำแบบขอคืนได้ £${amount} (20%)`, fullLabel: amount => `ชำระเต็มจำนวน £${amount}`,
+        payButton: amount => `ชำระ £${amount} (ต้นแบบ)`, programmeTitle: 'เราได้รับคำขอจองโปรแกรมของคุณแล้ว',
+        programmeMessage: name => `${name ? `ขอบคุณ ${name} ` : ''}ระบบต้นแบบได้บันทึกการชำระเงินของคุณแล้ว ยิมจะติดต่อกลับเพื่อยืนยันวันที่คุณขอ หากไม่สามารถจัดวันดังกล่าวได้ คุณสามารถขอคืนเงินได้`,
+        oneSessionTitle: 'รอบฝึกของคุณได้รับการยืนยันแล้ว', manySessionsTitle: 'รอบฝึกของคุณได้รับการยืนยันแล้ว',
+        sessionMessage: name => `${name ? `ขอบคุณ ${name} ` : ''}รอบฝึกส่วนตัวของคุณได้รับการยืนยันแล้ว กรุณามาถึงยิมก่อนรอบฝึกแรก 15 นาที`,
+        reference: 'หมายเลขอ้างอิงการจอง', shownIn: 'เวลาที่แสดง', timezone: 'เวลาภูเก็ต · ICT (UTC+7)'
+    } : {
+        locale: 'en-GB', coachPrice: (name, price) => `${name} · £${price}`,
+        time: (start, end) => `${start}:00–${end}:00`, noSessions: 'No sessions added yet.',
+        phuketTime: 'Phuket time', remove: 'Remove', total: 'Total', overlap: 'You already have a session at that time. Choose another one-hour slot.',
+        chooseType: 'Choose a training programme or private session.', chooseProgramme: 'Choose a training programme.',
+        chooseDate: 'Choose your preferred start date.', addSession: 'Add at least one private session.',
+        programme: 'Programme', preferredStart: 'Preferred start', awaiting: 'Request awaiting gym confirmation',
+        programmePrice: 'Programme price', paid: 'Paid in prototype', depositPaid: 'Refundable deposit paid in prototype',
+        arrivalBalance: 'Amount to be paid on arrival', session: 'Session', totalToPay: 'Total to pay',
+        depositLabel: amount => `Pay £${amount} refundable deposit (20%)`, fullLabel: amount => `Pay £${amount} in full`,
+        payButton: amount => `Pay £${amount} (prototype)`, programmeTitle: 'Your programme request has been received',
+        programmeMessage: name => `${name ? `Thanks, ${name}. ` : ''}Your payment is recorded for this prototype. The gym will contact you to confirm your requested start date. If they cannot accommodate it, your payment is refundable.`,
+        oneSessionTitle: 'Your session is confirmed', manySessionsTitle: 'Your sessions are confirmed',
+        sessionMessage: name => `${name ? `Thanks, ${name}. ` : ''}Your private coaching is confirmed. Please arrive at the gym 15 minutes before your first session.`,
+        reference: 'Booking reference', shownIn: 'Times shown in', timezone: 'Phuket time · ICT (UTC+7)'
+    };
 
     const programmeOptions = document.getElementById('programme-options');
     const sessionOptions = document.getElementById('session-options');
@@ -43,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function formatDate(value) {
         const parts = value.split('-').map(Number);
-        return new Intl.DateTimeFormat('en-GB', {
+        return new Intl.DateTimeFormat(copy.locale, {
             weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
         }).format(new Date(parts[0], parts[1] - 1, parts[2], 12));
     }
@@ -51,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function timeLabel(value) {
         const hour = Number(value.slice(0, 2));
         const end = hour + 1;
+        if (isThai) return copy.time(hour, end);
         const label = hour < 12 ? `${hour}:00am` : hour === 12 ? '12:00pm' : `${hour - 12}:00pm`;
         const endLabel = end < 12 ? `${end}:00am` : end === 12 ? '12:00pm' : `${end - 12}:00pm`;
         return `${label}–${endLabel}`;
@@ -88,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initialiseCoaches() {
-        const coachLabel = coach => `${coach.name} · £${coach.price}`;
+        const coachLabel = coach => copy.coachPrice(coach.name, coach.price);
         fillSelect(sessionCoach, coaches, 'id', coachLabel);
         fillSelect(availableCoach, coaches, 'id', coachLabel);
     }
@@ -114,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateAvailableCoaches() {
         if (bookingOrder() !== 'time') return;
         const available = coaches.filter(coach => isAvailable(coach.id, sessionDate.value, sessionTime.value));
-        fillSelect(availableCoach, available, 'id', coach => `${coach.name} · £${coach.price}`);
+        fillSelect(availableCoach, available, 'id', coach => copy.coachPrice(coach.name, coach.price));
     }
 
     function escapeHtml(value) {
@@ -125,17 +158,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderBasket() {
         if (!state.sessions.length) {
-            sessionBasket.innerHTML = '<p class="field-help">No sessions added yet.</p>';
+            sessionBasket.innerHTML = `<p class="field-help">${copy.noSessions}</p>`;
             return;
         }
         const rows = state.sessions.map((session, index) => `
             <div class="session-item">
-                <div><strong>${escapeHtml(session.coachName)}</strong><small>${formatDate(session.date)} · ${timeLabel(session.time)} · Phuket time</small></div>
+                <div><strong>${escapeHtml(session.coachName)}</strong><small>${formatDate(session.date)} · ${timeLabel(session.time)} · ${copy.phuketTime}</small></div>
                 <strong>£${session.price}</strong>
-                <button type="button" class="remove-session" data-remove-session="${index}">Remove</button>
+                <button type="button" class="remove-session" data-remove-session="${index}">${copy.remove}</button>
             </div>`).join('');
         const total = state.sessions.reduce((sum, session) => sum + session.price, 0);
-        sessionBasket.innerHTML = `${rows}<div class="basket-total">Total: £${total}</div>`;
+        sessionBasket.innerHTML = `${rows}<div class="basket-total">${copy.total}: £${total}</div>`;
     }
 
     document.querySelectorAll('input[name="booking-type"]').forEach(input => {
@@ -158,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!coach || !sessionDate.value || !sessionTime.value) return;
         const overlapping = state.sessions.some(session => session.date === sessionDate.value && session.time === sessionTime.value);
         if (overlapping) {
-            selectionError.textContent = 'You already have a session at that time. Choose another one-hour slot.';
+            selectionError.textContent = copy.overlap;
             return;
         }
         state.sessions.push({ coachId, coachName: coach.name, price: coach.price, date: sessionDate.value, time: sessionTime.value });
@@ -179,10 +212,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validateSelection() {
-        if (!state.type) return 'Choose a training programme or private session.';
-        if (state.type === 'programme' && !selectedProgramme()) return 'Choose a training programme.';
-        if (state.type === 'programme' && !programmeDate.value) return 'Choose your preferred start date.';
-        if (state.type === 'session' && !state.sessions.length) return 'Add at least one private session.';
+        if (!state.type) return copy.chooseType;
+        if (state.type === 'programme' && !selectedProgramme()) return copy.chooseProgramme;
+        if (state.type === 'programme' && !programmeDate.value) return copy.chooseDate;
+        if (state.type === 'session' && !state.sessions.length) return copy.addSession;
         return '';
     }
 
@@ -226,20 +259,23 @@ document.addEventListener('DOMContentLoaded', function () {
         let rows = '';
         if (state.type === 'programme') {
             const programme = selectedProgramme();
-            rows += `<div class="summary-row"><span>Programme</span><strong>${programme.name}</strong></div>`;
-            rows += `<div class="summary-row"><span>Preferred start</span><strong>${formatDate(programmeDate.value)}</strong></div>`;
-            rows += `<div class="summary-row"><span>Status</span><strong>Request awaiting gym confirmation</strong></div>`;
-            rows += `<div class="summary-row"><span>Programme price</span><strong>£${programme.price}</strong></div>`;
+            rows += `<div class="summary-row"><span>${copy.programme}</span><strong>${programme.name}</strong></div>`;
+            rows += `<div class="summary-row"><span>${copy.preferredStart}</span><strong>${formatDate(programmeDate.value)}</strong></div>`;
+            rows += `<div class="summary-row"><span>${isThai ? 'สถานะ' : 'Status'}</span><strong>${copy.awaiting}</strong></div>`;
+            rows += `<div class="summary-row"><span>${copy.programmePrice}</span><strong>£${programme.price}</strong></div>`;
             if (includePayment) {
                 const payFull = document.querySelector('input[name="payment-amount"]:checked').value === 'full';
-                rows += `<div class="summary-row"><span>${payFull ? 'Paid in prototype' : 'Refundable deposit paid in prototype'}</span><strong>£${payFull ? programme.price : programme.price * 0.2}</strong></div>`;
+                rows += `<div class="summary-row"><span>${payFull ? copy.paid : copy.depositPaid}</span><strong>£${payFull ? programme.price : programme.price * 0.2}</strong></div>`;
+                if (!payFull) {
+                    rows += `<div class="summary-row"><span>${copy.arrivalBalance}</span><strong>£${programme.price * 0.8}</strong></div>`;
+                }
             }
         } else {
             state.sessions.forEach((session, index) => {
-                rows += `<div class="summary-row"><span>Session ${index + 1}</span><strong>${escapeHtml(session.coachName)} · ${formatDate(session.date)} · ${timeLabel(session.time)}</strong></div>`;
+                rows += `<div class="summary-row"><span>${copy.session} ${index + 1}</span><strong>${escapeHtml(session.coachName)} · ${formatDate(session.date)} · ${timeLabel(session.time)}</strong></div>`;
             });
             const total = state.sessions.reduce((sum, session) => sum + session.price, 0);
-            rows += `<div class="summary-row"><span>${includePayment ? 'Paid in prototype' : 'Total to pay'}</span><strong>£${total}</strong></div>`;
+            rows += `<div class="summary-row"><span>${includePayment ? copy.paid : copy.totalToPay}</span><strong>£${total}</strong></div>`;
         }
         return rows;
     }
@@ -250,8 +286,8 @@ document.addEventListener('DOMContentLoaded', function () {
         options.hidden = state.type !== 'programme';
         if (state.type === 'programme') {
             const programme = selectedProgramme();
-            document.getElementById('deposit-label').textContent = `Pay £${programme.price * 0.2} refundable deposit (20%)`;
-            document.getElementById('full-label').textContent = `Pay £${programme.price} in full`;
+            document.getElementById('deposit-label').textContent = copy.depositLabel(programme.price * 0.2);
+            document.getElementById('full-label').textContent = copy.fullLabel(programme.price);
         }
         updatePayButton();
     }
@@ -265,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             amount = state.sessions.reduce((sum, session) => sum + session.price, 0);
         }
-        document.getElementById('pay-button').textContent = `Pay £${amount} (prototype)`;
+        document.getElementById('pay-button').textContent = copy.payButton(amount);
     }
 
     document.querySelectorAll('input[name="payment-amount"]').forEach(input => input.addEventListener('change', updatePayButton));
@@ -276,13 +312,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const title = document.getElementById('confirmation-title');
         const message = document.getElementById('confirmation-message');
         if (state.type === 'programme') {
-            title.textContent = 'Your programme request has been received';
-            message.textContent = `${name ? `Thanks, ${name}. ` : ''}Your payment is recorded for this prototype. The gym will contact you to confirm your requested start date. If they cannot accommodate it, your payment is refundable.`;
+            title.textContent = copy.programmeTitle;
+            message.textContent = copy.programmeMessage(name);
         } else {
-            title.textContent = state.sessions.length === 1 ? 'Your session is confirmed' : 'Your sessions are confirmed';
-            message.textContent = `${name ? `Thanks, ${name}. ` : ''}Your private coaching is confirmed. Please arrive at the gym 15 minutes before your first session.`;
+            title.textContent = state.sessions.length === 1 ? copy.oneSessionTitle : copy.manySessionsTitle;
+            message.textContent = copy.sessionMessage(name);
         }
-        document.getElementById('confirmation-summary').innerHTML = `<div class="summary-row"><span>Booking reference</span><strong>${reference}</strong></div>${summaryRows(true)}<div class="summary-row"><span>Times shown in</span><strong>Phuket time · ICT (UTC+7)</strong></div>`;
+        document.getElementById('confirmation-summary').innerHTML = `<div class="summary-row"><span>${copy.reference}</span><strong>${reference}</strong></div>${summaryRows(true)}<div class="summary-row"><span>${copy.shownIn}</span><strong>${copy.timezone}</strong></div>`;
         showStep(4);
     });
 
