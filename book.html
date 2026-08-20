@@ -49,118 +49,134 @@
     <section class="hero-page">
         <div class="hero-content">
             <h1>Book Training</h1>
-            <p>Reserve your Muay Thai training week in Phuket</p>
+            <p>Request a training programme or book private coaching in Phuket</p>
         </div>
     </section>
 
     <!-- Booking Journey -->
-    <section class="booking-page">
-        <div class="container">
-            <div class="booking-overview">
-                <div class="booking-panel">
-                    <span class="step-number">1</span>
-                    <h3>Choose your program</h3>
-                    <p>Select the Standard 7-Day Intensive or Elite Coaching Week.</p>
-                </div>
-                <div class="booking-panel">
-                    <span class="step-number">2</span>
-                    <h3>Share your dates</h3>
-                    <p>Tell us when you want to train and whether your travel plans are already fixed.</p>
-                </div>
-                <div class="booking-panel">
-                    <span class="step-number">3</span>
-                    <h3>Confirm with us</h3>
-                    <p>We will check availability, answer practical questions, and confirm next steps.</p>
-                </div>
+    <main class="booking-page">
+        <div class="container booking-shell" id="booking-app">
+            <ol class="booking-progress" aria-label="Booking progress">
+                <li class="active" data-progress="1"><span>1</span> Training</li>
+                <li data-progress="2"><span>2</span> Your details</li>
+                <li data-progress="3"><span>3</span> Payment</li>
+                <li data-progress="4"><span>4</span> Complete</li>
+            </ol>
+
+            <div class="booking-card">
+                <section class="booking-step active" data-step="1">
+                    <p class="eyebrow">Step 1 of 3</p>
+                    <h2>What would you like to book?</h2>
+                    <div class="choice-grid booking-type-grid">
+                        <label class="choice-card">
+                            <input type="radio" name="booking-type" value="programme">
+                            <span><strong>Training programme</strong><small>Choose a seven-day programme and suggest your preferred start date.</small></span>
+                        </label>
+                        <label class="choice-card">
+                            <input type="radio" name="booking-type" value="session">
+                            <span><strong>Private session</strong><small>Book one or more confirmed one-hour sessions with your chosen coaches.</small></span>
+                        </label>
+                    </div>
+
+                    <div id="programme-options" class="booking-branch" hidden>
+                        <h3>Choose your programme</h3>
+                        <div class="choice-grid">
+                            <label class="choice-card">
+                                <input type="radio" name="programme" value="standard" data-price="500">
+                                <span><strong>Standard 7-Day Intensive</strong><small>£500 · Two group sessions and one private session daily</small></span>
+                            </label>
+                            <label class="choice-card">
+                                <input type="radio" name="programme" value="elite" data-price="750">
+                                <span><strong>Elite Coaching Week</strong><small>£750 · Advanced programme with daily Master Jud coaching</small></span>
+                            </label>
+                        </div>
+                        <div class="form-group booking-date-field">
+                            <label for="programme-date">Suggested start date *</label>
+                            <input type="date" id="programme-date">
+                            <p class="field-help">This is a preferred date, not a confirmed booking. The gym will contact you to confirm availability.</p>
+                        </div>
+                    </div>
+
+                    <div id="session-options" class="booking-branch" hidden>
+                        <div class="branch-heading">
+                            <div><h3>Build your private-session booking</h3><p>Each session lasts one hour. You can choose a different coach for every session.</p></div>
+                            <span class="timezone-badge">Phuket time · ICT (UTC+7)</span>
+                        </div>
+                        <fieldset class="booking-order">
+                            <legend>How would you like to find a session?</legend>
+                            <label><input type="radio" name="booking-order" value="coach" checked> Choose a coach first</label>
+                            <label><input type="radio" name="booking-order" value="time"> Choose a date and time first</label>
+                        </fieldset>
+                        <div class="session-picker" id="session-picker">
+                            <div class="form-group" data-picker="coach"><label for="session-coach">Coach</label><select id="session-coach"></select></div>
+                            <div class="form-group"><label for="session-date">Date</label><select id="session-date"></select></div>
+                            <div class="form-group"><label for="session-time">Time</label><select id="session-time"></select></div>
+                            <div class="form-group" data-picker="available-coach" hidden><label for="available-coach">Available coach</label><select id="available-coach"></select></div>
+                            <button type="button" class="btn btn-secondary add-session" id="add-session">Add session</button>
+                        </div>
+                        <p class="field-help">Prototype availability is illustrative. Sessions run every day from 9:00am to 6:00pm.</p>
+                        <div id="session-basket" class="session-basket" aria-live="polite"></div>
+                    </div>
+
+                    <p class="booking-error" id="selection-error" role="alert"></p>
+                    <div class="step-actions"><button type="button" class="btn btn-primary btn-large" data-next="2">Continue</button></div>
+                </section>
+
+                <section class="booking-step" data-step="2" hidden>
+                    <p class="eyebrow">Step 2 of 3</p>
+                    <h2>Your details</h2>
+                    <form id="details-form">
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-name">Full name *</label><input id="booking-name" autocomplete="name" required></div>
+                            <div class="form-group"><label for="booking-email">Email address *</label><input type="email" id="booking-email" autocomplete="email" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-phone">Phone number *</label><input type="tel" id="booking-phone" autocomplete="tel" required></div>
+                            <div class="form-group"><label for="booking-country">Country *</label><input id="booking-country" autocomplete="country-name" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="booking-experience">Experience level *</label><select id="booking-experience" required><option value="">Select your level</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div>
+                            <div class="form-group" id="accommodation-group"><label for="booking-accommodation">Accommodation help</label><select id="booking-accommodation"><option>No, thank you</option><option>Yes, please send recommendations</option><option>Not sure yet</option></select></div>
+                        </div>
+                        <div class="form-group"><label for="booking-notes">Anything we should know?</label><textarea id="booking-notes" rows="4" placeholder="Tell us about your goals, injuries or questions."></textarea></div>
+                    </form>
+                    <div class="step-actions"><button type="button" class="btn btn-secondary" data-back="1">Back</button><button type="button" class="btn btn-primary btn-large" data-next="3">Review payment</button></div>
+                </section>
+
+                <section class="booking-step" data-step="3" hidden>
+                    <p class="eyebrow">Step 3 of 3</p>
+                    <h2>Review and pay</h2>
+                    <div id="booking-summary" class="booking-summary"></div>
+                    <fieldset id="programme-payment-options" class="payment-choice" hidden>
+                        <legend>How much would you like to pay?</legend>
+                        <label class="choice-card"><input type="radio" name="payment-amount" value="deposit" checked><span><strong id="deposit-label">Pay refundable 20% deposit</strong><small>The gym will contact you about your requested start date. Your deposit is refundable.</small></span></label>
+                        <label class="choice-card"><input type="radio" name="payment-amount" value="full"><span><strong id="full-label">Pay in full</strong><small>Your programme remains subject to confirmation by the gym.</small></span></label>
+                    </fieldset>
+                    <div class="prototype-notice"><strong>Prototype payment</strong><br>No payment is processed and the card details below are not transmitted or stored.</div>
+                    <form id="payment-form" class="payment-form">
+                        <div class="form-group"><label for="card-name">Name on card *</label><input id="card-name" autocomplete="cc-name" required></div>
+                        <div class="form-group"><label for="card-number">Card number *</label><input id="card-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required></div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="card-expiry">Expiry *</label><input id="card-expiry" autocomplete="cc-exp" placeholder="MM/YY" required></div>
+                            <div class="form-group"><label for="card-cvc">Security code *</label><input id="card-cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" required></div>
+                        </div>
+                    </form>
+                    <p class="booking-error" id="payment-error" role="alert"></p>
+                    <div class="step-actions"><button type="button" class="btn btn-secondary" data-back="2">Back</button><button type="button" class="btn btn-primary btn-large" id="pay-button">Complete prototype payment</button></div>
+                </section>
+
+                <section class="booking-step confirmation-step" data-step="4" hidden>
+                    <div class="confirmation-mark">✓</div>
+                    <p class="eyebrow">Payment complete</p>
+                    <h2 id="confirmation-title">Your booking is complete</h2>
+                    <p id="confirmation-message"></p>
+                    <div id="confirmation-summary" class="booking-summary"></div>
+                    <p class="form-note">Keep your reference number. Booking changes and cancellations will be added to the website in a future update; for now, contact the gym directly.</p>
+                    <a href="index.html" class="btn btn-primary">Return home</a>
+                </section>
             </div>
-
-            <form class="inquiry-form booking-form" id="contact-form">
-                <input type="hidden" name="form_type" value="Training booking">
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="country">Country *</label>
-                        <input type="text" id="country" name="country" placeholder="e.g., United Kingdom" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="package">Program *</label>
-                    <select id="package" name="package" required>
-                        <option value="">Select a program</option>
-                        <option value="Standard 7-Day Intensive (£500)">Standard 7-Day Intensive (£500)</option>
-                        <option value="Elite Coaching Week (£750)">Elite Coaching Week (£750)</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="start-date">Preferred Start Date *</label>
-                        <input type="date" id="start-date" name="preferred_start_date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="duration">Training Duration *</label>
-                        <select id="duration" name="duration" required>
-                            <option value="">Select duration</option>
-                            <option value="7 days">7 days</option>
-                            <option value="More than 7 days">More than 7 days</option>
-                            <option value="Flexible / not sure yet">Flexible / not sure yet</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="experience">Experience Level *</label>
-                        <select id="experience" name="experience" required>
-                            <option value="">Select your level</option>
-                            <option value="Beginner">Beginner (New to Muay Thai)</option>
-                            <option value="Intermediate">Intermediate (Some training experience)</option>
-                            <option value="Advanced">Advanced (Competitive experience)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="accommodation">Accommodation Help</label>
-                        <select id="accommodation" name="accommodation_help">
-                            <option value="">Select an option</option>
-                            <option value="Yes, please send recommendations">Yes, please send recommendations</option>
-                            <option value="No, I have accommodation">No, I have accommodation</option>
-                            <option value="Not sure yet">Not sure yet</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Anything we should know?</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your goals, injuries, travel plans, or questions."></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-large">Send booking request</button>
-                <p class="form-note">We will check availability and reply within 24 hours.</p>
-            </form>
-
-            <div id="form-message" class="form-message"></div>
         </div>
-    </section>
+    </main>
 
     <!-- Sticky WhatsApp Button (Mobile Only) -->
     <a href="https://wa.me/placeholder" class="sticky-whatsapp" target="_blank" title="Message us on WhatsApp">
@@ -216,5 +232,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="booking.js"></script>
 </body>
 </html>
