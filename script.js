@@ -1,207 +1,92 @@
-// Form submission handling and language routing
-
-document.addEventListener('DOMContentLoaded', function() {
-    // ===== Language Selection =====
-    const langToggle = document.getElementById('lang-toggle');
-    const langDropdown = document.getElementById('lang-dropdown');
-    const langOptions = document.querySelectorAll('.lang-option');
-
-    const pageLang = document.documentElement.lang && document.documentElement.lang.startsWith('th') ? 'th' : 'en';
-    updateLanguageDisplay(pageLang);
-
-    function getPageKey() {
-        const path = window.location.pathname;
-        const file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
-        const hash = window.location.hash;
-
-        const coachPages = [
-            'coach-master-jud.html',
-            'coach-adam.html',
-            'coach-nawaphon.html',
-            'coach-nin.html',
-            'coach-noi.html',
-            'coach-susun.html'
-        ];
-
-        if (coachPages.includes(file)) return file.replace('.html', '');
-        if (file === 'coaches.html') return 'coaches';
-        if (file === 'gallery.html') return 'gallery';
-        if (file === 'overseas.html') return 'overseas';
-        if (file === 'book.html') return 'book';
-        if (file === 'training.html') return 'training';
-        if (file === 'enquire.html') return 'enquire';
-        if (hash === '#packages') return 'training';
-        if (hash === '#inquiry-form') return 'enquire';
-        return 'home';
-    }
-
-    function getLanguageUrl(lang) {
-        const isThaiPage = window.location.pathname.includes('/th/');
-        const pageKey = getPageKey();
-        const thaiUrls = {
-            home: 'index.html',
-            training: 'training.html',
-            coaches: 'coaches.html',
-            gallery: 'gallery.html',
-            overseas: 'overseas.html',
-            book: 'book.html',
-            enquire: 'enquire.html',
-            'coach-master-jud': 'coach-master-jud.html',
-            'coach-adam': 'coach-adam.html',
-            'coach-nawaphon': 'coach-nawaphon.html',
-            'coach-nin': 'coach-nin.html',
-            'coach-noi': 'coach-noi.html',
-            'coach-susun': 'coach-susun.html'
+// Review prototype: never send enquiry data to the retained placeholder endpoint.
+document.addEventListener('DOMContentLoaded', () => {
+    const menu = document.querySelector('.menu-toggle');
+    const links = document.getElementById('nav-menu');
+    if (menu && links) {
+        const closeMenu = () => {
+            links.classList.remove('is-open');
+            menu.setAttribute('aria-expanded', 'false');
         };
-        const englishUrls = {
-            home: '../index.html',
-            training: '../index.html#packages',
-            coaches: '../coaches.html',
-            gallery: '../gallery.html',
-            overseas: '../overseas.html',
-            book: '../book.html',
-            enquire: '../index.html#inquiry-form',
-            'coach-master-jud': '../coach-master-jud.html',
-            'coach-adam': '../coach-adam.html',
-            'coach-nawaphon': '../coach-nawaphon.html',
-            'coach-nin': '../coach-nin.html',
-            'coach-noi': '../coach-noi.html',
-            'coach-susun': '../coach-susun.html'
-        };
-
-        if (lang === 'th') {
-            return isThaiPage ? thaiUrls[pageKey] : `th/${thaiUrls[pageKey]}`;
-        }
-
-        if (lang === 'en') {
-            return isThaiPage ? englishUrls[pageKey] : (pageKey === 'home' ? 'index.html' : englishUrls[pageKey].replace('../', ''));
-        }
-
-        return null;
-    }
-
-    if (langToggle && langDropdown) {
-        langToggle.addEventListener('click', function() {
-            langDropdown.classList.toggle('active');
+        menu.addEventListener('click', () => {
+            const open = menu.getAttribute('aria-expanded') !== 'true';
+            menu.setAttribute('aria-expanded', String(open));
+            links.classList.toggle('is-open', open);
         });
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.language-selector')) {
-                langDropdown.classList.remove('active');
+        links.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+                closeMenu();
+                menu.focus();
             }
-        });
-    }
-
-    langOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            const selectedLang = this.getAttribute('data-lang');
-            const targetUrl = getLanguageUrl(selectedLang);
-
-            if (targetUrl) {
-                localStorage.setItem('selectedLanguage', selectedLang);
-                window.location.href = targetUrl;
-                return;
-            }
-
-            // Other languages are shown in the selector for the demo but are not built yet.
-            updateLanguageDisplay(pageLang);
-            if (langDropdown) langDropdown.classList.remove('active');
-        });
-    });
-
-    function updateLanguageDisplay(lang) {
-        if (!langToggle) return;
-        const langMap = {
-            'en': 'EN',
-            'th': 'TH',
-            'de': 'DE',
-            'fr': 'FR',
-            'ar': 'AR',
-            'ru': 'RU',
-            'zh': 'ZH'
-        };
-        langToggle.textContent = langMap[lang] || 'EN';
-    }
-
-    // ===== Mobile Menu Toggle =====
-    const hamburger = document.getElementById('hamburger-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
         });
     }
 
     const form = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
-
     if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const message = {
-                ...Object.fromEntries(formData.entries()),
-                page_language: pageLang,
-                timestamp: new Date().toISOString()
+        // Protect legacy forms too: attaching this handler never enables live delivery.
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            if (!form.reportValidity()) return;
+            const status = document.getElementById('form-message');
+            if (status) {
+                status.textContent = 'Demo only - enquiry not sent. Your training is not confirmed. No details have been transmitted or saved by this site.';
+                status.focus();
+            }
+        });
+        const submit = document.getElementById('demo-submit');
+        if (submit) submit.disabled = false;
+        const start = document.getElementById('start-date');
+        const end = document.getElementById('end-date');
+        const flexible = document.getElementById('flexible');
+        if (start && end && flexible) {
+            const validateDates = () => {
+                end.setCustomValidity(!flexible.checked && start.value && end.value && end.value < start.value
+                    ? 'Choose an end date on or after your start date.' : '');
             };
-
-            fetch('https://formspree.io/f/myzerkny', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(message)
-            })
-            .then(response => {
-                if (response.ok) {
-                    if (formMessage) {
-                        formMessage.className = 'form-message success';
-                        formMessage.style.display = 'block';
-                        formMessage.textContent = pageLang === 'th'
-                            ? '✓ ขอบคุณครับ/ค่ะ เราจะติดต่อกลับภายใน 24 ชั่วโมง'
-                            : '✓ Thank you! We\'ll be in touch within 24 hours.';
-                    }
-                    form.reset();
-                    setTimeout(() => {
-                        if (formMessage) formMessage.style.display = 'none';
-                    }, 5000);
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                if (formMessage) {
-                    formMessage.className = 'form-message error';
-                    formMessage.style.display = 'block';
-                    formMessage.textContent = pageLang === 'th'
-                        ? 'ส่งแบบฟอร์มไม่สำเร็จ กรุณาลองอีกครั้งหรือส่งอีเมลโดยตรง'
-                        : 'Error submitting form. Please try again or email us directly.';
-                }
+            start.addEventListener('input', validateDates);
+            end.addEventListener('input', validateDates);
+            flexible.addEventListener('change', () => {
+                start.disabled = flexible.checked;
+                end.disabled = flexible.checked;
+                validateDates();
             });
+        }
+    }
+
+    const dialog = document.getElementById('photo-dialog');
+    if (dialog) {
+        const image = dialog.querySelector('img');
+        const caption = dialog.querySelector('.photo-caption');
+        document.querySelectorAll('[data-photo]').forEach(button => {
+            button.addEventListener('click', () => {
+                image.src = button.dataset.photo;
+                image.alt = button.querySelector('img').alt;
+                caption.textContent = button.dataset.caption;
+                dialog.showModal();
+            });
+        });
+        dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', event => {
+            if (event.target === dialog) {
+                const bounds = dialog.getBoundingClientRect();
+                if (event.clientX < bounds.left || event.clientX > bounds.right ||
+                    event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+            }
         });
     }
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href !== '#' && document.querySelector(href)) {
-                e.preventDefault();
-                document.querySelector(href).scrollIntoView({
-                    behavior: 'smooth'
-                });
+    document.querySelectorAll('.whatsapp-placeholder').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            // Keep the requested placeholder URL without sending visitors to an invalid number.
+            if (dialog) {
+                dialog.querySelector('img').hidden = true;
+                dialog.querySelector('.photo-caption').textContent = 'WhatsApp demo placeholder. A contact number has not been configured.';
+                dialog.showModal();
             }
         });
+    });
+    if (dialog) dialog.addEventListener('close', () => {
+        dialog.querySelector('img').hidden = false;
     });
 });

@@ -15,6 +15,7 @@ package-lock.json
 yarn.lock
 
 # Local/temporary files
+.preview-tools/
 *.log
 .env.local
 .env.development.local
